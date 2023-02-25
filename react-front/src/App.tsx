@@ -1,35 +1,20 @@
 import { useEffect, useState } from "react";
-import Unsplash from "unsplash-js";
 import Card from "./components/Card";
 import Navbar from "./components/Navbar";
+import Getimages from "./hooks/Getimages";
 
 const array = ["apple", "banana", "potato", "reddit"];
 
-interface RandomPhotos {
-  image: string;
-  userName: string;
-  userTag: string;
-  likesCount: number;
-}
-
-// const api = createApi({
-//   accessKey: `${process.env.REACT_APP_UNSPLASH_ACCESS_API_KEY}`,
-// });
-// const api = new
-
-function updateImagesData(data: any) {}
-
 function App() {
-  // useEffect(() => {
-  // async function reportData() {
-  //   const data = await api.photos
-  //     .getRandom({ count: 10 })
-  //     .then((jsonRes) => updateImagesData(jsonRes))
-  //     .catch((e) => console.log("Error: " + e));
-  // }
-  // }, []);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const [images, setImages] = useState({});
+  const data = async () => {
+    try {
+    } catch (error) {
+      console.log("Error sending query Request", error);
+    }
+  };
+  Getimages();
 
   return (
     <div className="App flex flex-col items-center">

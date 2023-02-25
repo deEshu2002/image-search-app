@@ -1,15 +1,21 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { createApi } from "unsplash-js";
-
-// https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY
-
+import Getimages from "../hooks/Getimages";
 
 function Searchbar() {
   function updateQuery(e: ChangeEvent<HTMLInputElement>) {
     SetQuery(e.target.value);
   }
-  const [query, SetQuery] = useState("" as string);
+  const [query, SetQuery] = useState("");
 
+  useEffect(() => {
+    const data = async () => {
+      try {
+        Getimages(query);
+      } catch (error) {
+        console.log("Error sending query Request", error);
+      }
+    };
+  }, [query]);
 
   return (
     <div className="flex md:order-1 w-96">
