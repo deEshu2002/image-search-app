@@ -12,24 +12,22 @@ interface RandomPhotos {
   likesCount: number;
 }
 
-const api = createApi({
-  accessKey: `${process.env.REACT_APP_UNSPLASH_ACCESS_API_KEY}`,
-});
-const api = new 
+// const api = createApi({
+//   accessKey: `${process.env.REACT_APP_UNSPLASH_ACCESS_API_KEY}`,
+// });
+// const api = new
 
-function updateImagesData(data: any) {
-
-}
+function updateImagesData(data: any) {}
 
 function App() {
-  useEffect(() => {
-    async function reportData() {
-      const data = await api.photos
-        .getRandom({ count: 10 })
-        .then((jsonRes) => updateImagesData(jsonRes))
-        .catch((e) => console.log("Error: " + e));
-    }
-  }, []);
+  // useEffect(() => {
+  // async function reportData() {
+  //   const data = await api.photos
+  //     .getRandom({ count: 10 })
+  //     .then((jsonRes) => updateImagesData(jsonRes))
+  //     .catch((e) => console.log("Error: " + e));
+  // }
+  // }, []);
 
   const [images, setImages] = useState({});
 
