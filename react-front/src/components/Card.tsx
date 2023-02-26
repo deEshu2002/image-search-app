@@ -1,26 +1,52 @@
-type CardProps = {
+import { Dispatch, SetStateAction } from "react";
+import HandleDigits from "../hooks/HandleDigits";
+
+export interface ImageData {
   id: number;
-  width: number;
-  height: number;
-  urls: { large: string; regular: string; raw: string; small: string };
-  color: string | null;
-  user: {
-    username: string;
-    name: string;
-  };
+  downloads: number;
+  downloadImage: string;
+  imageLink: string;
+  info?: string;
+  info_alt?: string;
+  instagramTag?: string;
+  likes: number;
+  twitterTag?: string;
+  user: string;
+  userName: string;
+  userProfilePhoto: string;
 }
 
+export interface CardProps extends ImageData {
+  modal: boolean;
+  setModal: Dispatch<SetStateAction<boolean>>;
+}
 
-
-function Card() {
+function Card({
+  id,
+  downloads,
+  imageLink,
+  downloadImage,
+  info,
+  info_alt,
+  instagramTag,
+  likes,
+  user,
+  userName,
+  userProfilePhoto,
+  twitterTag,
+  modal,
+  setModal,
+}: CardProps) {
   return (
-    <div className="flex flex-col flex-grow-0 flex-shrink max-w-[24rem] bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    <div
+      className="flex flex-col h-fit flex-grow-0 flex-shrink max-w-[24rem] bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+      onClick={() => setModal(true)}
+    >
       <a href="#">
         <img
-          className="rounded-t-lg w-full max-h-[34rem] object-cover object-center"
-          src="https://images.unsplash.com/photo-1515266591878-f93e32bc5937?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsdWV8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=70"
+          className="rounded-t-lg w-full aspect-auto max-h-[34rem] object-cover object-center"
+          src={`${imageLink}`}
           alt=""
-          
         />
       </a>
       <div className="p-5 sm:py-4">
@@ -28,16 +54,16 @@ function Card() {
           <div className="flex-shrink-0">
             <img
               className="w-8 h-8 rounded-full"
-              src="https://images.unsplash.com/photo-1568572933382-74d440642117?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZG9nc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60n"
-              alt="Neil image"
+              src={`${userProfilePhoto}`}
+              alt="Profile image"
             />
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-              Neil Sims
+              {user}
             </p>
             <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-              email@windster.com
+              {userName}
             </p>
           </div>
           <div className="inline-flex gap-1 items-center text-sm text-gray-900 dark:text-white">
@@ -56,7 +82,7 @@ function Card() {
               />
             </svg>
 
-            <p className="font-bold">2.5k</p>
+            <p className="font-bold">{HandleDigits(likes)}</p>
           </div>
         </div>
       </div>

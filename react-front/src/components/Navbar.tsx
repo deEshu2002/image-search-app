@@ -1,9 +1,10 @@
+import { IProps } from "../App";
 import DarkmodeToggle from "./DarkmodeToggle";
 import Searchbar from "./Searchbar";
 
-function Navbar() {
+function Navbar({ setMyVar }: IProps) {
   return (
-    <nav className="w-full shadow sticky top-0 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+    <nav className="z-50 w-full shadow sticky top-0 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
       <div className="container flex flex-wrap items-center justify-center gap-10 mx-auto">
         <a href="#" className="flex items-center">
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
@@ -11,8 +12,8 @@ function Navbar() {
           </span>
         </a>
 
-        <Searchbar/>
-        
+        <Searchbar setMyVar={setMyVar} />
+
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-2"
           id="navbar-search"
@@ -66,8 +67,7 @@ function Navbar() {
               </a>
             </li>
 
-            <DarkmodeToggle/>
-            
+            <DarkmodeToggle />
           </ul>
         </div>
       </div>

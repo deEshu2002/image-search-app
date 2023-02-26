@@ -40,7 +40,7 @@ function mapRandomSearchData(items: randomImage) {
     info_alt = items.description,
     twitterTag = items.user.twitter_username,
     instagramTag = items.user.instagram_username,
-    download = items.downloads;
+    downloads = items.downloads;
 
   return {
     id,
@@ -54,7 +54,7 @@ function mapRandomSearchData(items: randomImage) {
     info_alt,
     twitterTag,
     instagramTag,
-    download,
+    downloads,
   };
 }
 

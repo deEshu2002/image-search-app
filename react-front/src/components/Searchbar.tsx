@@ -1,20 +1,19 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import Getimages from "../hooks/Getimages";
+import { IProps } from "../App";
+import GetImages from "../hooks/GetImages";
+import { ImageData } from "../components/Card";
 
-function Searchbar() {
+function Searchbar({ setMyVar }: IProps) {
   function updateQuery(e: ChangeEvent<HTMLInputElement>) {
     SetQuery(e.target.value);
   }
   const [query, SetQuery] = useState("");
 
   useEffect(() => {
-    const data = async () => {
-      try {
-        Getimages(query);
-      } catch (error) {
-        console.log("Error sending query Request", error);
-      }
-    };
+    GetImages(query).then((data) => {
+      const refacterData = data as ImageData[];
+      setMyVar(refacterData);
+    });
   }, [query]);
 
   return (

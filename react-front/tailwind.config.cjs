@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
-  },
+    extend: {
+      gridTemplateColumns: {
+        // Simple 16 column grid
+        '3': 'repeat(3, 1fr)',
+      }
+  }},
   plugins: [],
 }
