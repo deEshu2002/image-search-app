@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import HandleDigits from "../hooks/HandleDigits";
+import { useColorMode } from "../hooks/UseColorMode";
 
 export interface ImageData {
   id: number;
@@ -37,9 +38,13 @@ function Card({
   modal,
   setModal,
 }: CardProps) {
+  const mode = useColorMode((state) => state.mode);
+
   return (
     <div
-      className="flex flex-col h-fit flex-grow-0 flex-shrink max-w-[24rem] bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+      className={`flex flex-col h-fit flex-grow-0 flex-shrink max-w-[24rem] ${
+        mode ? "bg-slate-800 " : "bg-white"
+      } border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700`}
       onClick={() => setModal(true)}
     >
       <a href="#">
@@ -58,15 +63,27 @@ function Card({
               alt="Profile image"
             />
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+          <div
+            className={`${
+              mode ? "text-white" : "text-gray-900"
+            } flex-1 min-w-0`}
+          >
+            <p className="text-sm font-medium truncate dark:text-white">
               {user}
             </p>
-            <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-              {userName}
+            <p
+              className={`${
+                mode ? "text-slate-400" : "text-gray-500"
+              } text-sm truncate dark:text-gray-400 italic`}
+            >
+              @{userName}
             </p>
           </div>
-          <div className="inline-flex gap-1 items-center text-sm text-gray-900 dark:text-white">
+          <div
+            className={`${
+              mode ? "text-white" : "text-gray-900"
+            } inline-flex gap-1 items-center text-sm  dark:text-white`}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

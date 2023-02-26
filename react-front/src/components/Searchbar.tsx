@@ -2,11 +2,15 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { IProps } from "../App";
 import GetImages from "../hooks/GetImages";
 import { ImageData } from "../components/Card";
+import { useColorMode } from "../hooks/UseColorMode";
 
 function Searchbar({ setMyVar }: IProps) {
   function updateQuery(e: ChangeEvent<HTMLInputElement>) {
     SetQuery(e.target.value);
   }
+
+  const mode = useColorMode((state) => state.mode);
+
   const [query, SetQuery] = useState("");
 
   useEffect(() => {

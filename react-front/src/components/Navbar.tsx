@@ -1,11 +1,20 @@
 import { IProps } from "../App";
+import { useColorMode } from "../hooks/UseColorMode";
 import DarkmodeToggle from "./DarkmodeToggle";
 import Searchbar from "./Searchbar";
 
 function Navbar({ setMyVar }: IProps) {
+  const mode = useColorMode((state) => state.mode);
+
   return (
-    <nav className="z-50 w-full shadow sticky top-0 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
-      <div className="container flex flex-wrap items-center justify-center gap-10 mx-auto">
+    <nav
+      className={`z-50 ${
+        mode ? "bg-slate-900" : "bg-white"
+      }  w-full shadow sticky top-0 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900`}
+    >
+      <div
+        className={` container flex flex-wrap items-center justify-center gap-10 mx-auto`}
+      >
         <a href="#" className="flex items-center">
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
             Image Gallery
@@ -41,11 +50,16 @@ function Navbar({ setMyVar }: IProps) {
               placeholder="Search..."
             />
           </div>
-          <ul className="flex flex-col p-4 mt-4 border align-text-bottom border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul
+            className={`${mode ? "!bg-slate-900 !text-white" : "!bg-white"} 
+             flex flex-col p-4 mt-4 border align-text-bottom border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700`}
+          >
             <li className="my-auto">
               <a
                 href="#"
-                className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className={` ${
+                  mode ? "bg-slate-800 text-white" : "bg-white"
+                } block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
               >
                 Explore
               </a>
@@ -53,7 +67,9 @@ function Navbar({ setMyVar }: IProps) {
             <li className="my-auto">
               <a
                 href="#"
-                className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className={`${
+                  mode ? "bg-slate-800 text-white" : "bg-white"
+                } block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
               >
                 Collection
               </a>
@@ -61,7 +77,9 @@ function Navbar({ setMyVar }: IProps) {
             <li className="my-auto !mr-20 ">
               <a
                 href="#"
-                className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className={`
+                ${mode ? "bg-slate-800 text-white" : "bg-white"}
+                block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
               >
                 Community
               </a>
