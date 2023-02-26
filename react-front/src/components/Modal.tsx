@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useEffect } from "react";
+import { FunctionComponent } from "react";
 import ReactDOM from "react-dom";
 import HandleDigits from "../hooks/HandleDigits";
-import { CardProps, ImageData } from "./Card";
+import { CardProps } from "./Card";
 
 export const Modal: FunctionComponent<CardProps> = (props: CardProps) => {
   return ReactDOM.createPortal(

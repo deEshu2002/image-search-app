@@ -1,9 +1,9 @@
-import React, { Suspense, useEffect, useState } from "react";
-import { CardProps, ImageData } from "./components/Card";
+import { Suspense, useEffect, useState } from "react";
+import { ImageData } from "./components/Card";
 import Navbar from "./components/Navbar";
 import GetImages from "./hooks/GetImages";
 import Card from "./components/Card";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Dispatch, SetStateAction } from "react";
 import { Modal } from "./components/Modal";
 
@@ -21,7 +21,7 @@ function App() {
     GetImages().then((data) => {
       const newArr = data as ImageData[];
       const appendsData = [...newArr, ...imageData];
-      setImageData(newArr as ImageData[]);
+      setImageData(appendsData as ImageData[]);
     });
   }, []);
 
@@ -63,7 +63,7 @@ function App() {
   }
 
   return (
-    <React.Fragment>
+    <>
       <div
         className={`flex flex-col items-center relative ${
           modal ? "-z-10 overflow-y-hidden " : "z-10"
@@ -94,7 +94,7 @@ function App() {
         </div>
         {modal && <Modal {...getModalProps()} />}
       </div>
-    </React.Fragment>
+    </>
   );
 }
 
