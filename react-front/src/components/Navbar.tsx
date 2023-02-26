@@ -10,7 +10,7 @@ function Navbar({ setMyVar }: IProps) {
     <nav
       className={`z-50 ${
         mode ? "bg-slate-900" : "bg-white"
-      }  w-full shadow sticky top-0 bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900`}
+      }  w-full shadow sticky top-0 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900`}
     >
       <div
         className={` container flex flex-wrap items-center justify-center gap-10 mx-auto`}

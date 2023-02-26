@@ -88,8 +88,7 @@ function App() {
               {imageData.map((elem, idx) => {
                 const props = mapProps(elem);
                 return (
-                  <motion.div
-                    layoutId={elem.id.toString()}
+                  <div
                     onClick={() => {
                       setSelectedId(elem.id);
                       props.setModal(true);
@@ -98,7 +97,7 @@ function App() {
                     key={idx}
                   >
                     <Card {...props} />
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
