@@ -3,11 +3,11 @@ import { ImageData } from "./components/Card";
 import Navbar from "./components/Navbar";
 import GetImages from "./hooks/GetImages";
 import Card from "./components/Card";
-import { motion } from "framer-motion";
 import { Dispatch, SetStateAction } from "react";
 import { Modal } from "./components/Modal";
 import { useColorMode } from "./hooks/UseColorMode";
 import { SkeletonCard } from "./components/Skeleton";
+import HandleQuery from "./hooks/HandleQuery";
 
 export interface IProps {
   setMyVar: Dispatch<SetStateAction<ImageData[]>>;
@@ -23,11 +23,11 @@ function App() {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    GetImages().then((data) => {
+    HandleQuery().then((data) => {
       setLoading(false);
       const newArr = data as ImageData[];
-      const appendsData = [...newArr, ...imageData];
-      setImageData(appendsData as ImageData[]);
+      setImageData(newArr);
+      console.log(imageData);
     });
   }, []);
 
@@ -85,21 +85,22 @@ function App() {
             <div
               className={`columns-3xs ${modal ? "mt-0 " : "mt-16 mb-16"} gap-4`}
             >
-              {imageData.map((elem, idx) => {
-                const props = mapProps(elem);
-                return (
-                  <div
-                    onClick={() => {
-                      setSelectedId(elem.id);
-                      props.setModal(true);
-                    }}
-                    className="mb-4 break-inside-avoid"
-                    key={idx}
-                  >
-                    <Card {...props} />
-                  </div>
-                );
-              })}
+              {imageData &&
+                imageData.map((elem, idx) => {
+                  const props = mapProps(elem);
+                  return (
+                    <div
+                      onClick={() => {
+                        setSelectedId(elem.id);
+                        props.setModal(true);
+                      }}
+                      className="mb-4 break-inside-avoid"
+                      key={idx}
+                    >
+                      <Card {...props} />
+                    </div>
+                  );
+                })}
             </div>
           )}
         </div>

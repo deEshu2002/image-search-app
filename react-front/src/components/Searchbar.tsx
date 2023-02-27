@@ -1,8 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { IProps } from "../App";
-import GetImages from "../hooks/GetImages";
 import { ImageData } from "../components/Card";
 import { useColorMode } from "../hooks/UseColorMode";
+import HandleQuery from "../hooks/HandleQuery";
 
 function Searchbar({ setMyVar }: IProps) {
   function updateQuery(e: ChangeEvent<HTMLInputElement>) {
@@ -14,7 +14,7 @@ function Searchbar({ setMyVar }: IProps) {
   const [query, SetQuery] = useState("");
 
   useEffect(() => {
-    GetImages(query).then((data) => {
+    HandleQuery(query).then((data) => {
       const refacterData = data as ImageData[];
       setMyVar(refacterData);
     });
