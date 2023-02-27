@@ -3,8 +3,10 @@ import dotenv from "dotenv";
 import { createApi } from "unsplash-js";
 import { Random, Stats } from "unsplash-js/dist/methods/photos/types";
 import bodyParser from "body-parser";
+import fetch from "cross-fetch"
 
 dotenv.config();
+globalThis.URL = require("url").URL;
 
 const app: Express = express();
 const port = process.env.EXPRESS_APP_API_KEY || 3000;
@@ -24,7 +26,7 @@ app.use((req, res, next) => {
 
 var urlencodedParser = bodyParser.urlencoded({ extended: true });
 
-const api = createApi({ accessKey: `${process.env.UNSPLASH_API_ACCESS_KEY}` });
+const api = createApi({ accessKey: `${process.env.UNSPLASH_API_ACCESS_KEY}`, fetch});
 
 type randomImage = Random & Stats;
 
