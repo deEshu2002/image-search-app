@@ -6,7 +6,6 @@ import Card from "./components/Card";
 import { Dispatch, SetStateAction } from "react";
 import { Modal } from "./components/Modal";
 import { useColorMode } from "./hooks/UseColorMode";
-import { SkeletonCard } from "./components/Skeleton";
 
 export interface IProps {
   setMyVar: Dispatch<SetStateAction<ImageData[]>>;
@@ -75,12 +74,10 @@ function App() {
         } flex flex-col items-center relative h-screen`}
       >
         <Navbar setMyVar={setImageData} />
-        <div className={`w-4/6  ${modal ? "-z-10 overflow-y-hidden" : "z-10"}`}>
-          {loading ? (
-            <SkeletonCard />
-          ) : (
+        <div className={`w-4/6  ${modal ? "-z-10" : "z-10"}`}>
+          {!loading && (
             <div
-              className={`columns-3xs ${modal ? "mt-0 " : "mt-16 mb-16"} gap-4`}
+              className={`columns-3 ${modal ? "mt-0 " : "mt-12 mb-16"} gap-4`}
             >
               {imageData.map((elem, idx) => {
                 const props = mapProps(elem);

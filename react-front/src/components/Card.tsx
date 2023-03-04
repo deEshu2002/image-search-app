@@ -25,7 +25,7 @@ function Card({
 
   return (
     <div
-      className={`flex flex-col h-fit flex-grow-0 flex-shrink max-w-[24rem] ${
+      className={`flex flex-col h-fit flex-grow-0 flex-shrink ${
         mode ? "bg-slate-800 " : "bg-white"
       } border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700`}
       onClick={() => setModal(true)}

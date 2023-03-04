@@ -2,7 +2,7 @@ const heightArray = ["h-56", "h-72", "h-80", "h-72", "h-56", "h-72"];
 
 export const SkeletonCard = () => {
   return (
-    <div className="mt-10 columns-3xs px-20">
+    <div className="mt-10 columns-3 px-20">
       {heightArray.map((elem, idx) => {
         return (
           <div

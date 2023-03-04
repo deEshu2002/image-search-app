@@ -1,5 +1,4 @@
 import { FunctionComponent } from "react";
-import ReactDOM from "react-dom";
 import HandleDigits from "../hooks/HandleDigits";
 import { useColorMode } from "../hooks/UseColorMode";
 import { CardProps } from "../types";
@@ -244,6 +243,5 @@ export const Modal: FunctionComponent<CardProps> = (props: CardProps) => {
         </div>
       </div>
     </>
-    // document.getElementById("portal") as HTMLDivElement
   );
 };
