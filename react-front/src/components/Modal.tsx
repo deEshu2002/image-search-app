@@ -2,17 +2,17 @@ import { FunctionComponent } from "react";
 import ReactDOM from "react-dom";
 import HandleDigits from "../hooks/HandleDigits";
 import { useColorMode } from "../hooks/UseColorMode";
-import { CardProps } from "./Card";
+import { CardProps } from "../types";
 
 export const Modal: FunctionComponent<CardProps> = (props: CardProps) => {
   const mode = useColorMode((state) => state.mode);
 
-  return ReactDOM.createPortal(
+  return (
     <>
       <div
         id="popup-modal"
         tabIndex={-1}
-        className="bg-transparent/70 absolute h-[100vh] z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 grid items-center"
+        className="bg-transparent/70 fixed h-[100vh] z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 grid items-center"
       >
         <div className="relative h-fit">
           <div
@@ -81,12 +81,10 @@ export const Modal: FunctionComponent<CardProps> = (props: CardProps) => {
                   </button>
                   <button
                     type="button"
-                    className={`${
-                      mode
-                        ? "text-black border-black hover:text-gray-100 border hover:border-gray-400 hover:bg-gray-600"
+                    className={`${mode? "text-black border-black hover:text-gray-100 border hover:border-gray-400 hover:bg-gray-600"
                         : "text-gray-600 border-gray-600 hover:text-black border hover:border-black hover:bg-gray-100"
                     }
-                    flex gap-2 text-gray-400 hover:text-black border border-gray-400 hover:border-black hover:bg-gray-100 focus:ring-4 focus:outline-none font-base rounded-lg text-sm pl-3 pr-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800`}
+                    flex gap-2  focus:ring-4 focus:outline-none font-base rounded-lg text-sm pl-3 pr-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -245,9 +243,7 @@ export const Modal: FunctionComponent<CardProps> = (props: CardProps) => {
           </div>
         </div>
       </div>
-    </>,
-    document.getElementById("portal") as HTMLDivElement
+    </>
+    // document.getElementById("portal") as HTMLDivElement
   );
 };
-
-// return isShown ? createPortal(modal, document.body) : null;

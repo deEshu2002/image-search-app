@@ -2,11 +2,13 @@ async function postQuery(url = "", data = {}) {
   const response = await fetch(url, {
     method: "POST",
     mode: "cors",
+    cache: 'no-cache',
     credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
     },
     redirect: "follow",
+    referrer:'no-referrer',
     body: JSON.stringify(data),
   });
   const json = await response.json();
@@ -34,7 +36,7 @@ export default function GetImages(query?: string) {
         })
         .catch((err) => {
           console.log(err);
-          reject(Error("It didn't work"));
+          reject(Error("API calls with query didn't work"));
         });
     } else {
       fetchRandomImg()
@@ -44,7 +46,7 @@ export default function GetImages(query?: string) {
         })
         .catch((err) => {
           console.log(err);
-          reject(Error("It didn't work"));
+          reject(Error("API calls for random Images didn't work"));
         });
     }
   });

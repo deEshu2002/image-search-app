@@ -9,7 +9,7 @@ function DarkmodeToggle() {
       <li className=" my-auto">
         <span
           className={`${
-            mode ? "bg-slate-800 text-white" : "bg-white"
+            mode ? "bg-slate-900 text-white" : "bg-white"
           } ml-3 text-sm font-medium text-gray-900 dark:text-gray-300`}
         >
           Dark Mode

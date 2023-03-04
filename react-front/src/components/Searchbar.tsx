@@ -1,24 +1,20 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { IProps } from "../App";
-import { ImageData } from "../components/Card";
+import GetImages from "../hooks/Getimages";
+import { ImageData } from "../types";
 import { useColorMode } from "../hooks/UseColorMode";
-import HandleQuery from "../hooks/HandleQuery";
 
-function Searchbar({ setMyVar }: IProps) {
-  function updateQuery(e: ChangeEvent<HTMLInputElement>) {
-    SetQuery(e.target.value);
-  }
+function  Searchbar({ setMyVar }: IProps) {
+  function handleQueryChange(e:React.KeyboardEvent<HTMLInputElement>) {
+    e.preventDefault();
 
-  const mode = useColorMode((state) => state.mode);
-
-  const [query, SetQuery] = useState("");
-
-  useEffect(() => {
-    HandleQuery(query).then((data) => {
+    GetImages((e.target as HTMLInputElement).value as string).then((data) => {
       const refacterData = data as ImageData[];
       setMyVar(refacterData);
     });
-  }, [query]);
+  }
+
+  const mode = useColorMode((state) => state.mode);
 
   return (
     <div className="flex md:order-1 w-96">
@@ -66,7 +62,7 @@ function Searchbar({ setMyVar }: IProps) {
           id="search-navbar"
           className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Search..."
-          onChange={(e) => updateQuery(e)}
+          onKeyUp={(e) => handleQueryChange(e)}
         />
       </div>
       <button

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { ImageData } from "./components/Card";
+import { ImageData } from "./types";
 import Navbar from "./components/Navbar";
-import GetImages from "./hooks/GetImages";
+import GetImages from "./hooks/Getimages";
 import Card from "./components/Card";
 import { Dispatch, SetStateAction } from "react";
 import { Modal } from "./components/Modal";
 import { useColorMode } from "./hooks/UseColorMode";
 import { SkeletonCard } from "./components/Skeleton";
-import HandleQuery from "./hooks/HandleQuery";
 
 export interface IProps {
   setMyVar: Dispatch<SetStateAction<ImageData[]>>;
@@ -23,41 +22,41 @@ function App() {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    HandleQuery().then((data) => {
-      setLoading(false);
-      const newArr = data as ImageData[];
-      setImageData(newArr);
-      console.log(imageData);
-    });
+    const onPageLoad = () => {
+      GetImages().then((data) => {
+        setLoading(false);
+        const newArr = data as ImageData[];
+        const appendsData = [...newArr, ...imageData];
+        setImageData(appendsData as ImageData[]);
+      });
+    };
+
+    if (document.readyState == "complete") {
+      onPageLoad();
+    } else {
+      window.addEventListener("load", onPageLoad);
+    }
+    return () => window.removeEventListener("load", onPageLoad);
   }, []);
 
   function mapProps(elem: ImageData) {
-    const id = elem.id,
-      downloads = elem.downloads,
-      downloadImage = elem.downloadImage,
-      imageLink = elem.imageLink,
-      info = elem.info,
-      infoALt = elem.info_alt,
-      instagramTag = elem.instagramTag,
-      likes = elem.likes,
-      twitterTag = elem.twitterTag,
-      user = elem.user,
-      userName = elem.userName,
-      userProfilePhoto = elem.userProfilePhoto;
+    const data = {
+      id: elem.id,
+      downloads: elem.downloads,
+      downloadImage: elem.downloadImage,
+      imageLink: elem.imageLink,
+      info: elem.info,
+      infoALt: elem.info_alt,
+      instagramTag: elem.instagramTag,
+      likes: elem.likes,
+      twitterTag: elem.twitterTag,
+      user: elem.user,
+      userName: elem.userName,
+      userProfilePhoto: elem.userProfilePhoto,
+    };
 
     return {
-      id,
-      downloads,
-      downloadImage,
-      imageLink,
-      info,
-      infoALt,
-      instagramTag,
-      likes,
-      twitterTag,
-      user,
-      userName,
-      userProfilePhoto,
+      ...data,
       modal,
       setModal,
     };
@@ -73,34 +72,31 @@ function App() {
       <div
         className={`${
           mode ? "bg-slate-800 text-white" : "bg-white"
-        } flex flex-col items-center relative ${
-          modal ? "-z-10 overflow-y-hidden " : "z-10"
-        }`}
+        } flex flex-col items-center relative h-screen`}
       >
         <Navbar setMyVar={setImageData} />
-        <div className={`w-4/6 ${modal ? "h-[90vh]" : "h-auto"}`}>
+        <div className={`w-4/6  ${modal ? "-z-10 overflow-y-hidden" : "z-10"}`}>
           {loading ? (
             <SkeletonCard />
           ) : (
             <div
               className={`columns-3xs ${modal ? "mt-0 " : "mt-16 mb-16"} gap-4`}
             >
-              {imageData &&
-                imageData.map((elem, idx) => {
-                  const props = mapProps(elem);
-                  return (
-                    <div
-                      onClick={() => {
-                        setSelectedId(elem.id);
-                        props.setModal(true);
-                      }}
-                      className="mb-4 break-inside-avoid"
-                      key={idx}
-                    >
-                      <Card {...props} />
-                    </div>
-                  );
-                })}
+              {imageData.map((elem, idx) => {
+                const props = mapProps(elem);
+                return (
+                  <div
+                    onClick={() => {
+                      setSelectedId(elem.id);
+                      props.setModal(true);
+                    }}
+                    className="mb-4 relative break-inside-avoid"
+                    key={idx}
+                  >
+                    <Card {...props} />
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>
