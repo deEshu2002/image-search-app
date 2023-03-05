@@ -48,7 +48,7 @@ function mapRandomSearchData(items: randomImage) {
 const getRandomPhotos = async (query?: string) => {
   let reportArray;
   try {
-    await api.photos.getRandom({ count: 20, query: query }).then((response) => {
+    await api.photos.getRandom({ count: 33, query: query }).then((response) => {
       if (response.type === "success") {
         const responseArray = response.response as randomImage[];
         reportArray = JSON.stringify(

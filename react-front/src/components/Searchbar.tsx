@@ -1,20 +1,25 @@
 import { ChangeEvent, useState } from "react";
-import { IProps } from "../App";
+import { AlterCardDataArray } from "../hooks/CardsDataStore";
 import GetImages from "../hooks/Getimages";
-import { ImageData } from "../types";
 import { useColorMode } from "../hooks/UseColorMode";
+import { CardData } from "../types";
 
-function  Searchbar({ setMyVar }: IProps) {
-  function handleQueryChange(e:React.KeyboardEvent<HTMLInputElement>) {
+function Searchbar() {
+  const mode = useColorMode((state) => state.mode);
+  const query = AlterCardDataArray((state) => state.query);
+  const setQuery = AlterCardDataArray((state) => state.setQuert);
+
+  const restoreCardData = AlterCardDataArray((state) => state.restoreCardData);
+
+  function handleQueryChange(e: React.KeyboardEvent<HTMLInputElement>) {
     e.preventDefault();
+    setQuery((e.target as HTMLInputElement).value);
 
     GetImages((e.target as HTMLInputElement).value as string).then((data) => {
-      const refacterData = data as ImageData[];
-      setMyVar(refacterData);
+      const queryResult = data as CardData[];
+      restoreCardData(queryResult);
     });
   }
-
-  const mode = useColorMode((state) => state.mode);
 
   return (
     <div className="flex md:order-1 w-96">

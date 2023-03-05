@@ -1,3 +1,6 @@
+
+
+
 async function postQuery(url = "", data = {}) {
   const response = await fetch(url, {
     method: "POST",
@@ -23,6 +26,7 @@ async function fetchRandomImg() {
 }
 
 export default function GetImages(query?: string) {
+
   let imageData;
 
   const promise = new Promise((resolve, reject) => {

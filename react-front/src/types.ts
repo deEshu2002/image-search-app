@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface ImageData {
+export interface CardData {
   id: number;
   downloads: number;
   downloadImage: string;
@@ -10,12 +10,12 @@ export interface ImageData {
   instagramTag?: string;
   likes: number;
   twitterTag?: string;
-  user: string;
   userName: string;
+  userTag: string;
   userProfilePhoto: string;
 }
 
-export interface CardProps extends ImageData {
-  modal: boolean;
-  setModal: Dispatch<SetStateAction<boolean>>;
+export interface CardProps extends CardData {
+  selectedId: number | null;
+  setCardOpen?: Dispatch<SetStateAction<boolean>>;
 }

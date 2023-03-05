@@ -1,9 +1,8 @@
-import { IProps } from "../App";
 import { useColorMode } from "../hooks/UseColorMode";
 import DarkmodeToggle from "./DarkmodeToggle";
 import Searchbar from "./Searchbar";
 
-function Navbar({ setMyVar }: IProps) {
+function Navbar() {
   const mode = useColorMode((state) => state.mode);
 
   return (
@@ -21,7 +20,7 @@ function Navbar({ setMyVar }: IProps) {
           </span>
         </a>
 
-        <Searchbar setMyVar={setMyVar} />
+        <Searchbar/>
 
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-2"
