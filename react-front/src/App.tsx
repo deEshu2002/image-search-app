@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useState, useRef} from "react";
 import Navbar from "./components/Navbar";
 import GetImages from "./hooks/Getimages";
 import Card from "./components/Card";
@@ -8,16 +8,18 @@ import { SkeletonCard } from "./components/Skeleton";
 import { CardData } from "./types";
 import { AlterCardDataArray } from "./hooks/CardsDataStore";
 import LoadingRotator from "./components/LoadingRotator";
+import useOnScreen from "./hooks/UseOnScreen";
+import {SelectedIdStore} from './hooks/SelectedIdStore';
+import MappedCards from "./components/MappedCards"; 
 
 function App() {
   const spinnerRef = useRef<HTMLDivElement>(null);
 
   const mode = useColorMode((state) => state.mode);
   const query = AlterCardDataArray((state) => state.query);
+  const selectedId = SelectedIdStore(state => state.selectedId)
 
-  const [loading, setLoading] = useState(true);
-
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [isloading, setIsLoading] = useState(true);
 
   const [cardOpen, setCardOpen] = useState(false);
   const [apicallCount, setApiCallCount] = useState(0);
@@ -29,17 +31,11 @@ function App() {
     GetImages(query).then((data) => {
       const newArr = data as CardData[];
       AppendCards(newArr);
-      setLoading(false);
+      setIsLoading(false);
       setApiCallCount((count) => count + 1);
       console.log(`Api called ${apicallCount + 1} times`);
     });
   }
-
-  const observer = useMemo(() => new IntersectionObserver(
-    ([entry]) => {
-      addImages();
-    }
-  ),[spinnerRef])
 
   useEffect(() => {
     const onPageLoad = () => {
@@ -53,26 +49,21 @@ function App() {
     return () => window.removeEventListener("load", onPageLoad)
   }, []);
 
-  useEffect(() => {
-    if (document.readyState == "complete") {
-      observer.observe(spinnerRef.current as Element);
-    } 
-    return () => {
-      observer.disconnect();
-    };
-  }, [spinnerRef.current]);
-
-
-
-
   function dispatchModalProps(id: number | null) {
     const row = CardInfo.flat();
     const props = row.find((elem) => elem.id === id) as CardData;
     return { ...props, selectedId, setCardOpen };
   }
 
+   const isVisible = useOnScreen(spinnerRef);
 
-  return (
+   useEffect(() => {
+    if(isVisible){
+      addImages();
+    }
+   }, [isVisible])
+
+     return (
     <>
       <div
         className={`${
@@ -81,36 +72,18 @@ function App() {
       >
         <Navbar />
         <div className={`w-4/6 mt-16 `}>
-          {loading ? (
+          {(isloading && CardInfo[0].length < 2) ? (
             <SkeletonCard />
           ) : (
             <div className={`flex felx-row justify-center gap-4`}>
-              {CardInfo!.map((row, rowIdx) => {
-                return (
-                  <motion.div className="flex flex-col w-auto" key={rowIdx}>
-                    {row.map((card, idx) => {
-                      const props = { ...card, selectedId };
-                      return (
-                        <motion.div
-                          key={card.id}
-                          onClick={() => {
-                            setSelectedId(card.id);
-                          }}
-                        >
-                          <Card {...props} key={card.id}/>
-                        </motion.div>
-                      );
-                    })}
-                  </motion.div>
-                );
-              })}
+              {
+                <MappedCards/>
+              }
             </div>
           )}
-          {!loading && (
             <div ref={spinnerRef}>
               <LoadingRotator />
             </div>
-          )}
         </div>
         {cardOpen && <Card {...dispatchModalProps(selectedId)} />}
       </div>
