@@ -1,16 +1,16 @@
 import { useEffect, useState, useRef} from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/NavBar/Navbar";
 import GetImages from "./hooks/Getimages";
-import Card from "./components/Card";
+import Card from "./components/Cards/Card";
 import { useColorMode } from "./hooks/UseColorMode";
 import { motion, AnimatePresence } from "framer-motion";
-import { SkeletonCard } from "./components/Skeleton";
+import { SkeletonCard } from "./components/SuspenseFallBack/Skeleton";
 import { CardData } from "./types";
 import { AlterCardDataArray } from "./hooks/CardsDataStore";
-import LoadingRotator from "./components/LoadingRotator";
+import LoadingRotator from "./components/SuspenseFallBack/LoadingRotator";
 import useOnScreen from "./hooks/UseOnScreen";
 import {SelectedIdStore} from './hooks/SelectedIdStore';
-import MappedCards from "./components/MappedCards"; 
+import MappedCards from "./components/Cards/MappedCards"; 
 
 function App() {
   const spinnerRef = useRef<HTMLDivElement>(null);

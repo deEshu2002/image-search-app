@@ -1,5 +1,5 @@
-import { useColorMode } from "../hooks/UseColorMode";
-import DarkmodeToggle from "./DarkmodeToggle";
+import { useColorMode } from "../../hooks/UseColorMode";
+import DarkmodeToggle from "../DarkmodeToggle";
 import Searchbar from "./Searchbar";
 
 function Navbar() {

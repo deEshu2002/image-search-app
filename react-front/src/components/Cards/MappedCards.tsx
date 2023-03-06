@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { memo } from "react";
-import { AlterCardDataArray } from "../hooks/CardsDataStore";
-import { SelectedIdStore } from "../hooks/SelectedIdStore";
+import { AlterCardDataArray } from "../../hooks/CardsDataStore";
+import { SelectedIdStore } from "../../hooks/SelectedIdStore";
 import Card from "./Card";
 import CardCloseButton from "./CardCloseButton";
 

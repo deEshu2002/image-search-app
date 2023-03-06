@@ -1,7 +1,7 @@
-import { AlterCardDataArray } from "../hooks/CardsDataStore";
-import GetImages from "../hooks/Getimages";
-import { useColorMode } from "../hooks/UseColorMode";
-import { CardData } from "../types";
+import { AlterCardDataArray } from "../../hooks/CardsDataStore";
+import GetImages from "../../hooks/Getimages";
+import { useColorMode } from "../../hooks/UseColorMode";
+import { CardData } from "../../types";
 
 function Searchbar() {
   const mode = useColorMode((state) => state.mode);

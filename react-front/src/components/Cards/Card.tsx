@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import HandleDigits from "../hooks/HandleDigits";
-import { SelectedIdStore } from "../hooks/SelectedIdStore";
-import { useColorMode } from "../hooks/UseColorMode";
-import { CardProps } from "../types";
+import HandleDigits from "../../hooks/HandleDigits";
+import { SelectedIdStore } from "../../hooks/SelectedIdStore";
+import { useColorMode } from "../../hooks/UseColorMode";
+import { CardProps } from "../../types";
 
 function Card({
   id,
