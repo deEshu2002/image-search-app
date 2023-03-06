@@ -28,8 +28,8 @@ function mapRandomSearchData(items: randomImage) {
   const data = {
     id: items.id,
     likes: items.likes,
-    user: items.user.name,
-    userName: items.user.username,
+    userName: items.user.name,
+    userTag: items.user.username,
     userProfilePhoto: items.user.profile_image.small,
     imageLink: items.urls.regular,
     downloadImage: items.links.download,

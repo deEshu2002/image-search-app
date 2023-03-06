@@ -15,12 +15,11 @@ import CardCloseButton from "./components/Cards/CardCloseButton";
 
 function App() {
   const spinnerRef = useRef<HTMLDivElement>(null);
+  const cardsArrayRef = useRef<HTMLDivElement>(null);
 
   const mode = useColorMode((state) => state.mode);
   const query = AlterCardDataArray((state) => state.query);
   const selectedId = SelectedIdStore((state) => state.selectedId);
-  
-  const removeSelectedId = SelectedIdStore((state) => state.emptySelectedId);
 
   const [isloading, setIsLoading] = useState(true);
 
@@ -55,7 +54,7 @@ function App() {
     const row = CardInfo.flat();
     const props = row.find((elem) => elem.id === id) as CardData;
     const signalVisibility = true;
-    return { ...props,  signalVisibility};
+    return { ...props, signalVisibility };
   }
 
   const isVisible = useOnScreen(spinnerRef);
@@ -65,6 +64,14 @@ function App() {
       addImages();
     }
   }, [isVisible]);
+
+  useEffect(() => {
+    if (selectedId != null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [selectedId]);
 
   return (
     <>
@@ -88,11 +95,17 @@ function App() {
         </div>
         <AnimatePresence>
           {selectedId && (
-            <motion.div layoutId={selectedId} className="absolute mt-20">
-              <motion.div onClick={() => removeSelectedId()}>
+            <motion.div
+              className="fixed flex justify-center top-0 left-0 w-full h-full bg-black/20 z-[1000] overflow-y-auto"
+              // onClick={() => removeSelectedId()}
+            >
+              <motion.div
+                className="absolute bg-white z-[10000] w-full top-[8%] flex justify-center"
+                layoutId={selectedId}
+              >
                 <CardCloseButton />
+                <Card {...dispatchModalProps(selectedId)} />
               </motion.div>
-              <Card {...dispatchModalProps(selectedId)} />
             </motion.div>
           )}
         </AnimatePresence>

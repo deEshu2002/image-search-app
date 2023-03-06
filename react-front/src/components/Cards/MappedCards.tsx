@@ -3,12 +3,10 @@ import { memo } from "react";
 import { AlterCardDataArray } from "../../hooks/CardsDataStore";
 import { SelectedIdStore } from "../../hooks/SelectedIdStore";
 import Card from "./Card";
-import CardCloseButton from "./CardCloseButton";
 
 export default memo(function () {
   const CardInfo = AlterCardDataArray((state) => state.cardInfo);
 
-  const selectedId = SelectedIdStore((state) => state.selectedId);
   const setSelectedId = SelectedIdStore((state) => state.setSelectedId);
 
   return (
@@ -16,12 +14,13 @@ export default memo(function () {
       {CardInfo!.map((row, rowIdx) => {
         return (
           <motion.div className="flex flex-col w-auto" key={rowIdx}>
-            {row.map((card, idx) => {
+            {row.map((card) => {
               const signalVisibility = false;
-              const props = { ...card,signalVisibility};
+              const props = { ...card, signalVisibility};
               return (
                 <motion.div
                   // key={`${card.id}`}
+                  className="flex flex-col bg-white border border-gray-200 rounded-lg shadow-sm mt-4"
                   layoutId={card.id}
                   onClick={() => setSelectedId(card.id)}
                 >

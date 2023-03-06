@@ -1,13 +1,18 @@
+import { SelectedIdStore } from "../../hooks/SelectedIdStore";
 
 export default function CardCloseButton() {
+
+  const removeSelectedId = SelectedIdStore((state) => state.emptySelectedId);
+
   return (
-    <>
+    <div className="flex w-fit float-right right-0 -top-4 absolute "
+    onClick={() => removeSelectedId()}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        fill="none"
+        fill="black"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
-        stroke="currentColor"
+        stroke="black"
         className="w-10 h-10 bg-white rounded-full p-1 border"
         data-modal-hide="popup-modal"
       >
@@ -18,6 +23,6 @@ export default function CardCloseButton() {
         />
       </svg>
       <span className="sr-only">Close modal</span>
-    </>
+    </div>
   );
 }

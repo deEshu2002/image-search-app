@@ -7,7 +7,7 @@ function Navbar() {
 
   return (
     <nav
-      className={`z-50 ${
+      className={`z-30 ${
         mode ? "bg-slate-900" : "bg-white"
       }  w-full shadow sticky top-0 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900`}
     >

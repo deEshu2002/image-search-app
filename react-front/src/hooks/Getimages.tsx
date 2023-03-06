@@ -1,6 +1,4 @@
 
-
-
 async function postQuery(url = "", data = {}) {
   const response = await fetch(url, {
     method: "POST",
@@ -27,7 +25,7 @@ async function fetchRandomImg() {
 
 export default function GetImages(query?: string) {
 
-  let imageData;
+  let cardData;
 
   const promise = new Promise((resolve, reject) => {
     if (query) {
@@ -35,8 +33,8 @@ export default function GetImages(query?: string) {
         query: query,
       })
         .then((json) => {
-          imageData = JSON.parse(json.data);
-          resolve(imageData);
+          cardData = JSON.parse(json.data);
+          resolve(cardData);
         })
         .catch((err) => {
           console.log(err);
@@ -45,8 +43,8 @@ export default function GetImages(query?: string) {
     } else {
       fetchRandomImg()
         .then((json) => {
-          imageData = JSON.parse(json.data);
-          resolve(imageData);
+          cardData = JSON.parse(json.data);
+          resolve(cardData);
         })
         .catch((err) => {
           console.log(err);
