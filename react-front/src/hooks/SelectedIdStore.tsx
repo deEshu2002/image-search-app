@@ -1,8 +1,9 @@
 import { create } from "zustand";
 
 interface SelectStore {
-  selectedId: number| null;
-  setSelectedId: (id: number) => void;
+  selectedId: string | null ;
+  setSelectedId: (id: string) => void;
+  emptySelectedId: () => void;
 }
 
 export const SelectedIdStore = create<SelectStore>((set) => ({
@@ -10,4 +11,7 @@ export const SelectedIdStore = create<SelectStore>((set) => ({
     setSelectedId(id) {
         set({selectedId:id})
     },
+    emptySelectedId(){
+      set({selectedId: null})
+    }
 }))

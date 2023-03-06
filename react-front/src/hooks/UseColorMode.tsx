@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
-interface IBook {
+interface ColorMode {
   mode: boolean;
   toggleMode: (mode: boolean) => void;
 }
 
-export const useColorMode = create<IBook>((set) => ({
+export const useColorMode = create<ColorMode>((set) => ({
   mode: false,
   toggleMode: (mode: boolean) => set({ mode: mode }),
 }));

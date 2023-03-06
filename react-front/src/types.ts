@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface CardData {
-  id: number;
+  id: string;
   downloads: number;
   downloadImage: string;
   imageLink: string;
@@ -16,6 +16,5 @@ export interface CardData {
 }
 
 export interface CardProps extends CardData {
-  selectedId: number | null;
-  setCardOpen?: Dispatch<SetStateAction<boolean>>;
+  selectedId: string | null;
 }

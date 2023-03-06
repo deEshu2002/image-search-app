@@ -21,7 +21,6 @@ function App() {
 
   const [isloading, setIsLoading] = useState(true);
 
-  const [cardOpen, setCardOpen] = useState(false);
   const [apicallCount, setApiCallCount] = useState(0);
 
   const CardInfo = AlterCardDataArray((state) => state.cardInfo);
@@ -39,7 +38,7 @@ function App() {
 
   useEffect(() => {
     const onPageLoad = () => {
-      addImages();
+    addImages();
     };
     if (document.readyState == "complete") {
       onPageLoad();
@@ -49,10 +48,10 @@ function App() {
     return () => window.removeEventListener("load", onPageLoad)
   }, []);
 
-  function dispatchModalProps(id: number | null) {
+  function dispatchModalProps(id: string | null) {
     const row = CardInfo.flat();
     const props = row.find((elem) => elem.id === id) as CardData;
-    return { ...props, selectedId, setCardOpen };
+    return { ...props, selectedId };
   }
 
    const isVisible = useOnScreen(spinnerRef);
@@ -85,7 +84,9 @@ function App() {
               <LoadingRotator />
             </div>
         </div>
-        {cardOpen && <Card {...dispatchModalProps(selectedId)} />}
+        <AnimatePresence>
+        {selectedId && <Card {...dispatchModalProps(selectedId)} />}
+        </AnimatePresence>
       </div>
     </>
   );

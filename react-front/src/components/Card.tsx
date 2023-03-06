@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import HandleDigits from "../hooks/HandleDigits";
+import { SelectedIdStore } from "../hooks/SelectedIdStore";
 import { useColorMode } from "../hooks/UseColorMode";
 import { CardProps } from "../types";
 
@@ -17,32 +18,10 @@ function Card({
   userProfilePhoto,
   twitterTag,
   selectedId,
-  setCardOpen
 }: CardProps) {
+
   return (
-    <motion.div>
-      {selectedId === id && setCardOpen && (
-        <motion.button
-          onClick={() => setCardOpen(false)}
-          data-modal-hide="popup-modal"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-10 h-10 bg-white rounded-full p-1 border"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-          <span className="sr-only">Close modal</span>
-        </motion.button>
-      )}
+    <>
       <motion.div id="image-container">
         <motion.img src={imageLink} />
         {selectedId === id  && (
@@ -99,7 +78,7 @@ function Card({
                 <motion.p>{userTag}</motion.p>
               </motion.div>
             </motion.div>
-            {selectedId === id && (
+            {selectedId === id &&(
               <motion.div>
                 <motion.div>
                   {instagramTag && (
@@ -143,7 +122,7 @@ function Card({
             )}
           </motion.div>
           <motion.div id="image-info">
-            {selectedId === id && (
+            {selectedId === id &&(
               <motion.div>
                 <motion.p>{HandleDigits(downloads)}</motion.p>
                 <motion.p>Downloads</motion.p>
@@ -176,7 +155,7 @@ function Card({
           )}
         </motion.div>
       </motion.section>
-    </motion.div>
+    </>
   );
 }
 

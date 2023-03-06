@@ -1,4 +1,3 @@
-import { ChangeEvent, useState } from "react";
 import { AlterCardDataArray } from "../hooks/CardsDataStore";
 import GetImages from "../hooks/Getimages";
 import { useColorMode } from "../hooks/UseColorMode";
