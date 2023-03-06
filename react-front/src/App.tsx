@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef} from "react";
+import { useEffect, useState, useRef } from "react";
 import Navbar from "./components/NavBar/Navbar";
 import GetImages from "./hooks/Getimages";
 import Card from "./components/Cards/Card";
@@ -9,15 +9,18 @@ import { CardData } from "./types";
 import { AlterCardDataArray } from "./hooks/CardsDataStore";
 import LoadingRotator from "./components/SuspenseFallBack/LoadingRotator";
 import useOnScreen from "./hooks/UseOnScreen";
-import {SelectedIdStore} from './hooks/SelectedIdStore';
-import MappedCards from "./components/Cards/MappedCards"; 
+import { SelectedIdStore } from "./hooks/SelectedIdStore";
+import MappedCards from "./components/Cards/MappedCards";
+import CardCloseButton from "./components/Cards/CardCloseButton";
 
 function App() {
   const spinnerRef = useRef<HTMLDivElement>(null);
 
   const mode = useColorMode((state) => state.mode);
   const query = AlterCardDataArray((state) => state.query);
-  const selectedId = SelectedIdStore(state => state.selectedId)
+  const selectedId = SelectedIdStore((state) => state.selectedId);
+  
+  const removeSelectedId = SelectedIdStore((state) => state.emptySelectedId);
 
   const [isloading, setIsLoading] = useState(true);
 
@@ -38,31 +41,32 @@ function App() {
 
   useEffect(() => {
     const onPageLoad = () => {
-    addImages();
+      addImages();
     };
     if (document.readyState == "complete") {
       onPageLoad();
     } else {
       window.addEventListener("load", onPageLoad);
     }
-    return () => window.removeEventListener("load", onPageLoad)
+    return () => window.removeEventListener("load", onPageLoad);
   }, []);
 
   function dispatchModalProps(id: string | null) {
     const row = CardInfo.flat();
     const props = row.find((elem) => elem.id === id) as CardData;
-    return { ...props, selectedId };
+    const signalVisibility = true;
+    return { ...props,  signalVisibility};
   }
 
-   const isVisible = useOnScreen(spinnerRef);
+  const isVisible = useOnScreen(spinnerRef);
 
-   useEffect(() => {
-    if(isVisible){
+  useEffect(() => {
+    if (isVisible) {
       addImages();
     }
-   }, [isVisible])
+  }, [isVisible]);
 
-     return (
+  return (
     <>
       <div
         className={`${
@@ -71,21 +75,26 @@ function App() {
       >
         <Navbar />
         <div className={`w-4/6 mt-16 `}>
-          {(isloading && CardInfo[0].length < 2) ? (
+          {isloading && CardInfo[0].length < 2 ? (
             <SkeletonCard />
           ) : (
             <div className={`flex felx-row justify-center gap-4`}>
-              {
-                <MappedCards/>
-              }
+              {<MappedCards />}
             </div>
           )}
-            <div ref={spinnerRef}>
-              <LoadingRotator />
-            </div>
+          <div ref={spinnerRef}>
+            <LoadingRotator />
+          </div>
         </div>
         <AnimatePresence>
-        {selectedId && <Card {...dispatchModalProps(selectedId)} />}
+          {selectedId && (
+            <motion.div layoutId={selectedId} className="absolute mt-20">
+              <motion.div onClick={() => removeSelectedId()}>
+                <CardCloseButton />
+              </motion.div>
+              <Card {...dispatchModalProps(selectedId)} />
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
     </>

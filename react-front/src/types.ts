@@ -16,5 +16,5 @@ export interface CardData {
 }
 
 export interface CardProps extends CardData {
-  selectedId: string | null;
+  signalVisibility: boolean;
 }

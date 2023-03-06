@@ -11,26 +11,21 @@ export default memo(function () {
   const selectedId = SelectedIdStore((state) => state.selectedId);
   const setSelectedId = SelectedIdStore((state) => state.setSelectedId);
 
-  const removeSelectedId = SelectedIdStore((state) => state.emptySelectedId);
-
   return (
     <>
       {CardInfo!.map((row, rowIdx) => {
         return (
           <motion.div className="flex flex-col w-auto" key={rowIdx}>
             {row.map((card, idx) => {
-              const props = { ...card, selectedId };
+              const signalVisibility = false;
+              const props = { ...card,signalVisibility};
               return (
                 <motion.div
-                // key={`${card.id}`}
+                  // key={`${card.id}`}
+                  layoutId={card.id}
+                  onClick={() => setSelectedId(card.id)}
                 >
-                  {selectedId === card.id &&
-                    <div onClick={() => removeSelectedId()}>
-                    <CardCloseButton />
-                  </div>}
-                    <div onClick={ () =>setSelectedId(card.id)}>
-                    <Card {...props} />
-                  </div>
+                  <Card {...props} />
                 </motion.div>
               );
             })}

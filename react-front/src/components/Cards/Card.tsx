@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import HandleDigits from "../../hooks/HandleDigits";
-import { SelectedIdStore } from "../../hooks/SelectedIdStore";
 import { useColorMode } from "../../hooks/UseColorMode";
 import { CardProps } from "../../types";
 
@@ -17,14 +16,14 @@ function Card({
   userTag,
   userProfilePhoto,
   twitterTag,
-  selectedId,
+  signalVisibility = false,
 }: CardProps) {
 
   return (
     <>
       <motion.div id="image-container">
         <motion.img src={imageLink} />
-        {selectedId === id  && (
+        {signalVisibility &&(
           <motion.div id="image-buttons">
             <motion.div>
               <motion.button>
@@ -78,7 +77,7 @@ function Card({
                 <motion.p>{userTag}</motion.p>
               </motion.div>
             </motion.div>
-            {selectedId === id &&(
+            {signalVisibility &&(
               <motion.div>
                 <motion.div>
                   {instagramTag && (
@@ -122,7 +121,7 @@ function Card({
             )}
           </motion.div>
           <motion.div id="image-info">
-            {selectedId === id &&(
+            {signalVisibility && (
               <motion.div>
                 <motion.p>{HandleDigits(downloads)}</motion.p>
                 <motion.p>Downloads</motion.p>
@@ -146,7 +145,7 @@ function Card({
               <motion.p>{HandleDigits(likes)}</motion.p>
             </motion.div>
           </motion.div>
-          {selectedId === id && (
+          {signalVisibility && (
             <motion.div id="image-contents">
               <motion.h6>{id}</motion.h6>
               {info && <motion.h1>{info}</motion.h1>}
