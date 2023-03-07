@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 import Navbar from "./components/NavBar/Navbar";
 import GetImages from "./hooks/Getimages";
 import Card from "./components/Cards/Card";
@@ -81,26 +81,25 @@ function App() {
         } flex flex-col items-center relative h-full`}
       >
         <Navbar />
-        <div className={`w-4/6 mt-16 `}>
+        <motion.div className={`w-5/6 mt-16 `}>
           {isloading && CardInfo[0].length < 2 ? (
             <SkeletonCard />
           ) : (
-            <div className={`flex felx-row justify-center gap-4`}>
-              {<MappedCards />}
-            </div>
+            <Suspense fallback={<SkeletonCard />}>
+              <motion.div className={`flex flex-wrap justify-center`} layout>
+                {<MappedCards />}
+              </motion.div>
+            </Suspense>
           )}
           <div ref={spinnerRef}>
             <LoadingRotator />
           </div>
-        </div>
+        </motion.div>
         <AnimatePresence>
           {selectedId && (
-            <motion.div
-              className="fixed flex justify-center top-0 left-0 w-full h-full bg-black/20 z-[1000] overflow-y-auto"
-              // onClick={() => removeSelectedId()}
-            >
+            <motion.div className="fixed flex justify-center top-0 left-0 w-full h-full bg-transparent/20 z-[1000] overflow-y-auto">
               <motion.div
-                className="absolute bg-white z-[10000] w-full top-[8%] flex justify-center"
+                className="absolute bg-white z-[10000] w-[98%] top-[2%] flex flex-row justify-center rounded-xl"
                 layoutId={selectedId}
               >
                 <CardCloseButton />

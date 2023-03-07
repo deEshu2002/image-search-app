@@ -1,14 +1,28 @@
 import { motion } from "framer-motion";
+import { useColorMode } from "../../hooks/UseColorMode";
 
 type ImageEmbeddedButtonsProps = {
-    downloadImage:string
-}
+  downloadImage: string;
+};
 
-export default function ImageEmbeddedButtons({downloadImage}:ImageEmbeddedButtonsProps) {
+export default function ImageEmbeddedButtons({
+  downloadImage,
+}: ImageEmbeddedButtonsProps) {
+  const isDarkMode = useColorMode((state) => state.mode);
+
   return (
-    <motion.div id="image-buttons">
-      <motion.div>
-        <motion.button>
+    <motion.div
+      id="image-buttons"
+      className={`absolute w-[98%] flex justify-between bottom-4 left-6`}
+    >
+      <motion.div className="flex">
+        <motion.button
+          className={` ${
+            isDarkMode
+              ? "text-black border-black hover:text-gray-100 border hover:border-gray-400 hover:bg-gray-600"
+              : "text-gray-600 border-gray-600 hover:text-black border hover:border-black hover:bg-gray-100"
+          } flex gap-2  focus:ring-4 focus:outline-none font-base rounded-lg text-sm pl-3 pr-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -25,7 +39,13 @@ export default function ImageEmbeddedButtons({downloadImage}:ImageEmbeddedButton
           </svg>
           <motion.p>Share</motion.p>
         </motion.button>
-        <motion.button>
+        <motion.button
+          className={`${
+            isDarkMode
+              ? "text-black border-black hover:text-gray-100 border hover:border-gray-400 hover:bg-gray-600"
+              : "text-gray-600 border-gray-600 hover:text-black border hover:border-black hover:bg-gray-100"
+          } flex gap-2  focus:ring-4 focus:outline-none font-base rounded-lg text-sm pl-3 pr-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800`}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -43,7 +63,12 @@ export default function ImageEmbeddedButtons({downloadImage}:ImageEmbeddedButton
           <motion.p>Info</motion.p>
         </motion.button>
       </motion.div>
-      <motion.a type="button" target={"_blank"} href={downloadImage}>
+      <motion.a
+        type="button"
+        target={"_blank"}
+        href={downloadImage}
+        className={`relative right-2 bottom-2 text-white bg-green-600 hover:bg-green-700 focus:ring-4 font-medium rounded-lg text-base px-6 py-3.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
+      >
         Download Image
       </motion.a>
     </motion.div>

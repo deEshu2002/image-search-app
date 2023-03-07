@@ -8,10 +8,9 @@ type SocialTags = {
 export default function SocialTags({instagramTag, twitterTag}:SocialTags) {
 
     return (
-              <motion.div>
-                <motion.div>
+              <>
                   {instagramTag && (
-                    <motion.div>
+                    <motion.div className="flex italic items-center">
                       <svg
                         width="20px"
                         height="20px"
@@ -27,10 +26,8 @@ export default function SocialTags({instagramTag, twitterTag}:SocialTags) {
                       <motion.p>/ {instagramTag}</motion.p>
                     </motion.div>
                   )}
-                </motion.div>
-                <motion.div>
                   {twitterTag && (
-                    <motion.div>
+                    <motion.div className="flex italic items-center">
                       <svg
                         fill="#000000"
                         width="14px"
@@ -46,7 +43,6 @@ export default function SocialTags({instagramTag, twitterTag}:SocialTags) {
                       <motion.p>/ {twitterTag}</motion.p>
                     </motion.div>
                   )}
-                </motion.div>
-              </motion.div>
+              </>
             )
 }

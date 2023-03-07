@@ -5,7 +5,7 @@ export default function CardCloseButton() {
   const removeSelectedId = SelectedIdStore((state) => state.emptySelectedId);
 
   return (
-    <div className="flex w-fit float-right right-0 -top-4 absolute "
+    <div className="flex w-fit float-right cursor-pointer -right-4 -top-4 absolute z-50"
     onClick={() => removeSelectedId()}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
