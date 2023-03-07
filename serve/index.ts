@@ -10,7 +10,16 @@ dotenv.config();
 
 const app: Express = express();
 
-app.use(cors({ origin: true }));
+app.use(
+  cors({
+    origin: true,
+    methods: ["GET", "PUT", "POST"],
+    allowedHeaders: [
+      "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization",
+    ],
+    exposedHeaders: ["Content-Range", "X-Content-Range"],
+  })
+);
 
 const port = process.env.PORT || 3000;
 
