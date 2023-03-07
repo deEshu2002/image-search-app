@@ -4,6 +4,10 @@
 
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
+    "cd serve setupEnv": {
+      "name": "setup env variable",
+      "command": "cd serve && vi .env"
+    },
     "cd serve && npm i ": {
       "name": "install server dependencies ",
       "command": "cd serve && npm i "
@@ -19,10 +23,6 @@
     "cd react-front && npm run dev": {
       "name": "cd react-front && npm run dev",
       "command": "cd react-front && npm run dev"
-    },
-    "cd serve setupEnv": {
-      "name": "setup env variable",
-      "command": "cd serve && vi .env"
     }
   }
 }
