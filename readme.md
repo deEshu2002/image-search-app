@@ -32,12 +32,12 @@ _Below is an example of how start the react application with your API Keys._
    ```
 5. Create file inside serve folder `.env` and paste your api keys as following
    ```sh
-    EXPRESS_APP_API_KEY=9000;
+    PORT=4000;
     UNSPLASH_API_ACCESS_KEY="YOUR_API_KEY";
    ```
 6. now start the server
    ```sh
    cd ..
-   cd serve && ts-node-esm index.ts
+   cd serve && pnpm run dev
    cd react-front &&  pnpm run dev
    ```
