@@ -1,3 +1,5 @@
+> **_NOTE:_**  This make use of its own server to call to external api. The feeder server wouldn't work on codesandbox due to CORS, so it is preferred to use in **localhost**. 
+
 <!-- GETTING STARTED -->
 
 ## Getting Started
